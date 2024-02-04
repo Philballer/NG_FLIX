@@ -1,29 +1,46 @@
-<div class="slider">
-  <div class="slide">
-    <div class="slide-bg">
-      <img
-        src="https://hips.hearstapps.com/digitalspyuk.cdnds.net/17/25/1498134404-transformers-dark-of-the-moon-bumblebee-poster.jpg?crop=0.8888888888888888xw:1xh;center,top&resize=1200:*"
-        alt=""
-      />
-    </div>
-
-    <div class="slide-pane">
-      <h2 class="title mb-5">Slider Ttile</h2>
-      <div class="meta mb-4">
-        <div class="rating mb-1">
-          <i>star-icon</i>
-          <span>8.9</span>
-          <span>/10</span>
-        </div>
-
-        <div class="votes mb-1">
-          <i>vote-icon</i>
-          <span>4433</span>
-        </div>
-
-        <div class="release-date">20.06.2024</div>
+<div class="slider" *ngIf="popularMovies as movies">
+  <ng-container *ngFor="let movie of movies; let movie_index = index">
+    <div class="slide" *ngIf="movie_index === startIndex" @slideFade>
+      <div class="slide-bg">
+        <img
+          [src]="'https://image.tmdb.org/t/p/original' + movie.backdrop_path"
+          alt="movies-banner"
+        />
       </div>
-      <div class="description">some description text</div>
+
+      <div class="slide-pane">
+        <h2 class="title mb-5">
+          {{ movie_index + 1 }}.
+          {{ '    ' }}
+          {{ movie.original_title }}
+        </h2>
+        <div class="meta mb-4">
+          <div class="rating mb-1">
+            <i class="pi pi-star-fill"></i>
+            <span>
+              {{ movie.vote_average | roundUp }}
+            </span>
+            <span>/10</span>
+          </div>
+
+          <div class="votes mb-1">
+            <i class="pi pi-users"></i>
+            <span>
+              {{ movie.vote_count }}
+            </span>
+          </div>
+
+          <div class="release-date">
+            <i class="pi pi-calendar"></i>
+            <span>
+              {{ movie.release_date }}
+            </span>
+          </div>
+        </div>
+        <div class="description">
+          {{ movie.overview }}
+        </div>
+      </div>
     </div>
-  </div>
+  </ng-container>
 </div>

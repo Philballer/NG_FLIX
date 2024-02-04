@@ -1,7 +1,11 @@
+@import '../../../variables.scss';
+
 .slider {
+  position: relative;
+  height: 35rem;
   .slide {
     width: 100%;
-    position: relative;
+    position: absolute;
     &-bg {
       height: 35rem;
       position: relative;
@@ -19,6 +23,7 @@
         position: absolute;
         top: 0;
         left: 0;
+
         background-image: linear-gradient(
           90deg,
           rgba(0, 0, 0, 1) 0%,
@@ -31,7 +36,7 @@
       position: absolute;
       top: 5rem;
       left: 5rem;
-      color: white;
+      color: $text-light;
 
       .title {
         font-size: 2.5rem;
@@ -40,6 +45,16 @@
       .meta {
         font-size: 1.2rem;
       }
+
+      .description {
+        font-size: 1.1rem;
+        width: 75%;
+      }
     }
   }
+}
+
+.pi {
+  color: $rate-icon;
+  // margin-right: 10px;
 }
