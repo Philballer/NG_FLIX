@@ -8,11 +8,14 @@ import { IApiResponse } from '../../interfaces/i-Api-response';
   providedIn: 'root',
 })
 export class MovieService {
+  private apiUrl = 'https://api.themoviedb.org/3';
+  private apiKey = '8e154c15f61520e817d886ec21621b89';
+
   constructor(private http: HttpClient) {}
 
   public getPopularMovies(): Observable<IApiResponse<IMovie>> {
     return this.http.get<IApiResponse<IMovie>>(
-      'https://api.themoviedb.org/3/movie/popular?api_key=8e154c15f61520e817d886ec21621b89'
+      `${this.apiUrl}/movie/popular?api_key=${this.apiKey}`
     );
   }
 }

@@ -10,6 +10,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import { imageUrl } from '../../cosntants/images-size';
 
 @Component({
   selector: 'app-slider',
@@ -28,6 +29,8 @@ export class SliderComponent implements OnInit {
   public popularMovies: IMovie[] | undefined;
 
   public startIndex: number = 0;
+
+  public imageUrl = imageUrl.original;
 
   public constructor(private movieService: MovieService) {
     this.movieService

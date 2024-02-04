@@ -2,10 +2,7 @@
   <ng-container *ngFor="let movie of movies; let movie_index = index">
     <div class="slide" *ngIf="movie_index === startIndex" @slideFade>
       <div class="slide-bg">
-        <img
-          [src]="'https://image.tmdb.org/t/p/original' + movie.backdrop_path"
-          alt="movies-banner"
-        />
+        <img [src]="imageUrl + movie.backdrop_path" [alt]="movie.title" />
       </div>
 
       <div class="slide-pane">
@@ -33,7 +30,7 @@
           <div class="release-date">
             <i class="pi pi-calendar"></i>
             <span>
-              {{ movie.release_date }}
+              {{ movie.release_date | date }}
             </span>
           </div>
         </div>
