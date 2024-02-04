@@ -1,0 +1,22 @@
+<a *ngIf="movie || tvShow" class="card">
+  <div class="card-rating">
+    <i class="pi pi-star-fill"></i>
+    <span>{{
+      (isTvShow ? tvShow?.vote_average : movie?.vote_average) | roundUp
+    }}</span>
+    <span>/10</span>
+  </div>
+  <div class="card-image">
+    <img
+      [src]="
+        isTvShow
+          ? imageUrl + tvShow?.backdrop_path
+          : imageUrl + movie?.backdrop_path
+      "
+      [alt]="isTvShow ? tvShow?.name : movie?.title"
+    />
+  </div>
+  <p class="card-title">
+    {{ isTvShow ? tvShow?.original_name : movie?.original_title }}
+  </p>
+</a>

@@ -1,3 +1,14 @@
 <app-slider></app-slider>
-<div>Popular Movies</div>
-<div>Popular TV Shows</div>
+<ng-container *ngIf="upcomingMovies$ | async as upcomingMovies">
+  <app-banner header="Upcoming Movies" [movies]="upcomingMovies"></app-banner>
+</ng-container>
+<ng-container *ngIf="topRatedMovies$ | async as topRatedMovies">
+  <app-banner header="Top Rated Movies" [movies]="topRatedMovies"></app-banner>
+</ng-container>
+<ng-container *ngIf="popularTvShows$ | async as popularTvShows">
+  <app-banner
+    header="Top Rated Tv Shows"
+    [tvShows]="popularTvShows"
+    [isTvShow]="true"
+  ></app-banner>
+</ng-container>

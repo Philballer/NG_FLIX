@@ -8,9 +8,16 @@ html {
   margin: 0;
   padding: 0;
   border: 0;
+  color: #fff;
   text-decoration: none;
 }
 
 body {
   font-size: 14px;
+  background-color: #141414;
+}
+
+.container {
+  margin: 0.5rem;
+  padding: 0.5rem;
 }

@@ -10,6 +10,8 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import { imageUrl } from '../../cosntants/images-size';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-slider',
@@ -25,17 +27,17 @@ import {
   ],
 })
 export class SliderComponent implements OnInit {
-  public popularMovies: IMovie[] | undefined;
+  public popularMovies$?: Observable<IMovie[]>;
 
   public startIndex: number = 0;
 
-  public constructor(private movieService: MovieService) {
-    this.movieService
-      .getPopularMovies()
-      .subscribe((response) => (this.popularMovies = response.results));
-  }
+  public imageUrl = imageUrl.original;
+
+  public constructor(private movieService: MovieService) {}
 
   public ngOnInit(): void {
+    this.popularMovies$ = this.movieService.getMoviesByType('popular');
+
     setInterval(() => {
       this.startIndex++;
       if (this.startIndex === 15) this.startIndex = 0;

@@ -1,0 +1,44 @@
+.card {
+  display: block;
+  height: 425px;
+  position: relative;
+  border: 1px solid #999;
+  border-radius: 5px;
+
+  &-rating {
+    position: absolute;
+    display: flex;
+    align-items: end;
+    background-color: black;
+    border-radius: 5px;
+    top: 10px;
+    left: 5px;
+    padding: 5px 10px;
+
+    .pi {
+      font-size: 1.1rem;
+      color: orange;
+      margin-right: 5px;
+    }
+  }
+
+  &-image {
+    height: 375px;
+    img {
+      width: 100%;
+      object-fit: cover;
+      height: 375px;
+      border-radius: 5px 5px 0 0;
+    }
+  }
+
+  &-title {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    height: 50px;
+    background-color: black;
+    border-radius: 0 0 5px 5px;
+    padding: 0 10px;
+  }
+}
