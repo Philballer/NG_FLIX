@@ -1,4 +1,10 @@
-<a *ngIf="movie || tvShow" class="card">
+<a
+  routerLink="/details/{{ isTvShow ? MovieType.TV : MovieType.Movie }}/{{
+    isTvShow ? tvShow?.id : movie?.id
+  }}"
+  *ngIf="movie || tvShow"
+  class="card"
+>
   <div class="card-rating">
     <i class="pi pi-star-fill"></i>
     <span>{{
@@ -10,13 +16,15 @@
     <img
       [src]="
         isTvShow
-          ? imageUrl + tvShow?.backdrop_path
-          : imageUrl + movie?.backdrop_path
+          ? posterUrl + tvShow?.backdrop_path
+          : posterUrl + movie?.backdrop_path
       "
       [alt]="isTvShow ? tvShow?.name : movie?.title"
     />
   </div>
-  <p class="card-title">
-    {{ isTvShow ? tvShow?.original_name : movie?.original_title }}
-  </p>
+  <div class="card-title">
+    <p class="card-title">
+      {{ isTvShow ? tvShow?.original_name : movie?.original_title }}
+    </p>
+  </div>
 </a>

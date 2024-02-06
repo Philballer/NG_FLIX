@@ -3,9 +3,14 @@
 .slider {
   position: relative;
   height: 35rem;
+  border: 2px solid #2a2020;
+
+  box-shadow: 0 10px 20px #181515;
+
   .slide {
     width: 100%;
     position: absolute;
+    cursor: pointer;
     &-bg {
       height: 35rem;
       position: relative;
@@ -56,5 +61,4 @@
 
 .pi {
   color: $rate-icon;
-  // margin-right: 10px;
 }

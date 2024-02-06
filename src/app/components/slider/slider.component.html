@@ -1,6 +1,11 @@
 <div class="slider" *ngIf="popularMovies$ | async as movies">
   <ng-container *ngFor="let movie of movies; let movie_index = index">
-    <div class="slide" *ngIf="movie_index === startIndex" @slideFade>
+    <div
+      routerLink="/details/movie/{{ movie.id }}"
+      class="slide"
+      *ngIf="movie_index === startIndex"
+      @slideFade
+    >
       <div class="slide-bg">
         <img [src]="imageUrl + movie.backdrop_path" [alt]="movie.title" />
       </div>

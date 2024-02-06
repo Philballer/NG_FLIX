@@ -12,11 +12,12 @@ import {
 } from '@angular/animations';
 import { imageUrl } from '../../cosntants/images-size';
 import { Observable } from 'rxjs';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-slider',
   standalone: true,
-  imports: [CommonModule, RoundUpPipe],
+  imports: [CommonModule, RoundUpPipe, RouterLink],
   templateUrl: './slider.component.html',
   styleUrl: './slider.component.scss',
   animations: [

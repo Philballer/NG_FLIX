@@ -29,4 +29,13 @@ export class MovieService {
       )
       .pipe(map((response) => response.results));
   }
+
+  public getMovieOrTvDetailsById(
+    type: string,
+    id: number
+  ): Observable<IMovie | ITvShow> {
+    return this.http.get<IMovie | ITvShow>(
+      `${this.apiUrl}/${type}/${id}?api_key=${this.apiKey}`
+    );
+  }
 }
