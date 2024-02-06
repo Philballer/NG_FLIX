@@ -5,10 +5,10 @@
 <ng-container *ngIf="topRatedMovies$ | async as topRatedMovies">
   <app-banner header="Top Rated Movies" [movies]="topRatedMovies"></app-banner>
 </ng-container>
-<ng-container *ngIf="popularTvShows$ | async as popularTvShows">
+<ng-container *ngIf="topRatedTvShows$ | async as topRatedTvShows">
   <app-banner
     header="Top Rated Tv Shows"
-    [tvShows]="popularTvShows"
+    [tvShows]="topRatedTvShows"
     [isTvShow]="true"
   ></app-banner>
 </ng-container>

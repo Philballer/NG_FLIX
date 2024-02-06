@@ -17,13 +17,13 @@ import { ITvShow } from '../../interfaces/i-tvShow';
 export class HomeComponent implements OnInit {
   public upcomingMovies$?: Observable<IMovie[]>;
   public topRatedMovies$?: Observable<IMovie[]>;
-  public popularTvShows$?: Observable<ITvShow[]>;
+  public topRatedTvShows$?: Observable<ITvShow[]>;
 
   constructor(private movieService: MovieService) {}
 
   public ngOnInit(): void {
     this.upcomingMovies$ = this.movieService.getMoviesByType('upcoming');
-    this.topRatedMovies$ = this.movieService.getMoviesByType('top-rated');
-    this.popularTvShows$ = this.movieService.getTvShowsByType('popular');
+    this.topRatedMovies$ = this.movieService.getMoviesByType('top_rated');
+    this.topRatedTvShows$ = this.movieService.getTvShowsByType('top_rated');
   }
 }
