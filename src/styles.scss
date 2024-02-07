@@ -1,20 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
 @import 'primeflex/primeflex.css';
 @import 'primeicons/primeicons.css';
+@import 'primeng/resources/themes/md-dark-indigo/theme.css';
+@import 'primeng/resources/primeng.css';
 
-*,
-html {
-  font-family: 'Roboto', sans-serif;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  color: #fff;
+* {
   text-decoration: none;
 }
 
 body {
   font-size: 14px;
   background-color: #141414;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  color: #fff;
 }
 
 .container {

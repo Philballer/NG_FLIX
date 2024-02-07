@@ -1,3 +1,98 @@
-<pre>
-    {{ details$ | async | json }}
-</pre>
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+
+<ng-container *ngIf="details$ | async as data">
+  <app-slider
+    [data]="[data]"
+    [isTvShow]="isTvShow"
+    [singleSlideBanner]="true"
+  ></app-slider>
+
+  <p-tabView>
+    <p-tabPanel header="Overview">
+      <div class="grid">
+        <div class="col-3">
+          <img class="poster" [src]="posterUrl + data.poster_path" alt="" />
+        </div>
+        <div class="col-9">
+          <h2>Overview</h2>
+          <p class="overview">{{ data.overview }}</p>
+          <div class="stat">
+            <div class="label">Release: Date</div>
+            <div class="value">
+              {{ (isTvShow ? data.first_air_date : data.release_date) | date }}
+            </div>
+          </div>
+
+          <div class="stat">
+            <div class="label">Language</div>
+            <div class="value">
+              {{ data.original_language | uppercase }}
+            </div>
+          </div>
+
+          <div class="stat">
+            <div class="label">Revenue:</div>
+            <div class="value">
+              {{ data.revenue | currency }}
+            </div>
+          </div>
+
+          <div class="stat">
+            <div class="label">Status:</div>
+            <div class="value">
+              {{ data.status }}
+            </div>
+          </div>
+
+          <div class="stat">
+            <div class="label">Genres:</div>
+            <div class="value">
+              <span *ngFor="let genre of data.genres">
+                {{ genre.name }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="Videos">
+      <ng-container *ngIf="trailer$ | async as trialers">
+        <div class="grid">
+          <div class="col-4" *ngFor="let video of trialers | slice: 0 : 9">
+            <app-youtube-player
+              [key]="video.key"
+              [name]="video.name"
+            ></app-youtube-player>
+          </div>
+        </div>
+      </ng-container>
+
+      <pre>
+        {{ images$ | async | json }}
+      </pre>
+    </p-tabPanel>
+    <p-tabPanel header="Photos">
+      <ng-container *ngIf="images$ | async as photos">
+        <div class="grid">
+          <div class="col-2" *ngFor="let photo of photos">
+            <img
+              class="show-image"
+              [src]="posterUrl + photo.file_path"
+              alt=""
+            />
+          </div>
+        </div>
+      </ng-container>
+    </p-tabPanel>
+  </p-tabView>
+
+  <ng-container *ngIf="similarShows$ | async as shows">
+    <app-banner
+      [header]="isTvShow ? 'Similar Tv Shows' : 'Similar Movies'"
+      [isTvShow]="isTvShow"
+      [movies]="!isTvShow ? shows : undefined"
+      [tvShows]="isTvShow ? shows : undefined"
+      [numberOfCards]="18"
+    ></app-banner>
+  </ng-container>
+</ng-container>

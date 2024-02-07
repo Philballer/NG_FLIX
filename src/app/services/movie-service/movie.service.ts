@@ -4,6 +4,11 @@ import { Observable, map } from 'rxjs';
 import { IMovie } from '../../interfaces/i-movie';
 import { IApiResponse } from '../../interfaces/i-Api-response';
 import { ITvShow } from '../../interfaces/i-tvShow';
+import {
+  IMovieTvShow,
+  IMovieTvTrailer,
+  IPicture,
+} from '../../interfaces/types';
 
 @Injectable({
   providedIn: 'root',
@@ -33,9 +38,42 @@ export class MovieService {
   public getMovieOrTvDetailsById(
     type: string,
     id: number
-  ): Observable<IMovie | ITvShow> {
-    return this.http.get<IMovie | ITvShow>(
+  ): Observable<IMovieTvShow> {
+    return this.http.get<IMovieTvShow>(
       `${this.apiUrl}/${type}/${id}?api_key=${this.apiKey}`
     );
+  }
+
+  public getMovieOrTvTrailersById(
+    type: string,
+    id: number
+  ): Observable<IMovieTvTrailer[]> {
+    return this.http
+      .get<IApiResponse<IMovieTvTrailer>>(
+        `${this.apiUrl}/${type}/${id}/videos?api_key=${this.apiKey}`
+      )
+      .pipe(map((response) => response.results));
+  }
+
+  public getMovieOrTvImagesById(
+    type: string,
+    id: number
+  ): Observable<IPicture[]> {
+    return this.http
+      .get<IApiResponse<IPicture>>(
+        `${this.apiUrl}/${type}/${id}/images?api_key=${this.apiKey}`
+      )
+      .pipe(map((response) => response.backdrops));
+  }
+
+  public getMovieOrTvSimilarsById(
+    type: string,
+    id: number
+  ): Observable<IMovieTvShow[]> {
+    return this.http
+      .get<IApiResponse<IMovieTvShow>>(
+        `${this.apiUrl}/${type}/${id}/similar?api_key=${this.apiKey}`
+      )
+      .pipe(map((response) => response.results));
   }
 }

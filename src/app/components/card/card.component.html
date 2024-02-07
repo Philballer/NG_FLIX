@@ -16,8 +16,8 @@
     <img
       [src]="
         isTvShow
-          ? posterUrl + tvShow?.backdrop_path
-          : posterUrl + movie?.backdrop_path
+          ? posterUrl + tvShow?.poster_path
+          : posterUrl + movie?.poster_path
       "
       [alt]="isTvShow ? tvShow?.name : movie?.title"
     />

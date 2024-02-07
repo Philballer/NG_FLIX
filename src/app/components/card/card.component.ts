@@ -24,7 +24,7 @@ export class CardComponent {
   @Input()
   public isTvShow = false;
 
-  public posterUrl = posterUrl.original;
+  public posterUrl = posterUrl.w500;
 
   public MovieType = MovieType;
 }

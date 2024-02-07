@@ -4,14 +4,20 @@
   </div>
   <div class="grid">
     <ng-container *ngIf="!isTvShow; else tvShow"></ng-container>
-    <div class="col-2" *ngFor="let movie of movies | slice: 0 : 12">
+    <div
+      class="col-2"
+      *ngFor="let movie of movies | slice: 0 : numberOfCards || 12"
+    >
       <app-card [movie]="movie"></app-card>
     </div>
   </div>
 </div>
 
 <ng-template #tvShow>
-  <div class="col-2" *ngFor="let tvShow of tvShows | slice: 0 : 12">
+  <div
+    class="col-2"
+    *ngFor="let tvShow of tvShows | slice: 0 : numberOfCards || 12"
+  >
     <app-card [tvShow]="tvShow" [isTvShow]="isTvShow"></app-card>
   </div>
 </ng-template>

@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { IMovie } from '../../interfaces/i-movie';
-import { MovieService } from '../../services/movie-service/movie.service';
+import { Component, OnInit, Input } from '@angular/core';
+
 import { CommonModule } from '@angular/common';
 import { RoundUpPipe } from '../../pipes/round-up.pipe';
 import {
@@ -11,8 +10,9 @@ import {
   trigger,
 } from '@angular/animations';
 import { imageUrl } from '../../cosntants/images-size';
-import { Observable } from 'rxjs';
+
 import { RouterLink } from '@angular/router';
+import { IMovieTvShow } from '../../interfaces/types';
 
 @Component({
   selector: 'app-slider',
@@ -23,25 +23,29 @@ import { RouterLink } from '@angular/router';
   animations: [
     trigger('slideFade', [
       state('void', style({ opacity: 0 })),
-      transition('void <=> *', [animate('2s')]),
+      transition('void <=> *', [animate('1s')]),
     ]),
   ],
 })
 export class SliderComponent implements OnInit {
-  public popularMovies$?: Observable<IMovie[]>;
+  @Input()
+  public data!: IMovieTvShow[];
+
+  @Input()
+  public singleSlideBanner = false;
+
+  @Input()
+  public isTvShow = false;
 
   public startIndex: number = 0;
 
   public imageUrl = imageUrl.original;
 
-  public constructor(private movieService: MovieService) {}
-
   public ngOnInit(): void {
-    this.popularMovies$ = this.movieService.getMoviesByType('popular');
-
-    setInterval(() => {
-      this.startIndex++;
-      if (this.startIndex === 15) this.startIndex = 0;
-    }, 5000);
+    !this.singleSlideBanner &&
+      setInterval(() => {
+        this.startIndex++;
+        if (this.startIndex === 15) this.startIndex = 0;
+      }, 5000);
   }
 }

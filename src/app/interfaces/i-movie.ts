@@ -11,4 +11,5 @@ export interface IMovie {
   title: string;
   vote_average: string;
   vote_count: number;
+  name?: string;
 }

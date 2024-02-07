@@ -24,4 +24,7 @@ export class BannerComponent {
 
   @Input()
   public isTvShow = false;
+
+  @Input()
+  public numberOfCards?: number;
 }

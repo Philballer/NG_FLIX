@@ -1,0 +1,44 @@
+@import '../../../variables.scss';
+
+::ng-deep {
+  .p-tabview .p-tabview-nav {
+    justify-content: center;
+  }
+
+  .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+    color: $text-primary;
+    transition: 750ms all;
+  }
+
+  .p-tabview .p-tabview-nav .p-tabview-ink-bar {
+    background-color: $text-primary;
+  }
+}
+
+.poster {
+  width: 100%;
+}
+
+.overview {
+  line-height: 1.5;
+}
+
+.stat {
+  display: flex;
+  margin-bottom: 15px;
+
+  .label {
+    width: 150px;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  .value {
+    color: $text-primary;
+    letter-spacing: 0.5px;
+  }
+}
+
+.show-image {
+  width: 100%;
+}

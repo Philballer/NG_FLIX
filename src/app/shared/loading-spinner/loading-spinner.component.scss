@@ -1,0 +1,29 @@
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh; // Adjust height as needed
+}
+
+.bar {
+  width: 18px; // Width of each bar
+  height: 60px; // Height of each bar
+  background: linear-gradient(
+    to top,
+    #53198a 0%,
+    #0575b6 100%
+  ); // Purple gradient
+  margin: 0 5px; // Spacing between bars
+  animation: wave 1.5s infinite ease-in-out; // Animation
+}
+
+@keyframes wave {
+  0%,
+  40%,
+  100% {
+    transform: scaleY(0.4); // Scale down
+  }
+  20% {
+    transform: scaleY(1.3); // Scale up
+  }
+}

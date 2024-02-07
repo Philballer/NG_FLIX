@@ -1,23 +1,49 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from '../../services/movie-service/movie.service';
 import { ActivatedRoute } from '@angular/router';
-import { IMovie } from '../../interfaces/i-movie';
-import { ITvShow } from '../../interfaces/i-tvShow';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { MovieType } from '../../cosntants/type-enum';
+import { SliderComponent } from '../../components/slider/slider.component';
+import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
+import { TabViewModule } from 'primeng/tabview';
+import { posterUrl } from '../../cosntants/images-size';
+import {
+  IMovieTvShow,
+  IMovieTvTrailer,
+  IPicture,
+} from '../../interfaces/types';
+import { YoutubePlayerComponent } from '../../components/youtube-player/youtube-player.component';
+import { BannerComponent } from '../../components/banner/banner.component';
 
 @Component({
   selector: 'app-show-detail',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    TabViewModule,
+    SliderComponent,
+    LoadingSpinnerComponent,
+    YoutubePlayerComponent,
+    BannerComponent,
+  ],
   templateUrl: './show-detail.component.html',
   styleUrl: './show-detail.component.scss',
 })
 export class ShowDetailComponent implements OnInit {
-  public details$?: Observable<IMovie | ITvShow>;
+  public details$?: Observable<IMovieTvShow>;
+
+  public trailer$?: Observable<IMovieTvTrailer[]>;
+
+  public similarShows$?: Observable<IMovieTvShow[]>;
+
+  public images$?: Observable<IPicture[]>;
 
   public isTvShow = false;
+
+  public loading = true;
+
+  public posterUrl = posterUrl.w500;
 
   constructor(
     private movieService: MovieService,
@@ -31,11 +57,22 @@ export class ShowDetailComponent implements OnInit {
 
       if (type === MovieType.TV) this.isTvShow = true;
 
-      if (type && id)
-        this.details$ = this.movieService.getMovieOrTvDetailsById(
+      if (type && id) {
+        const newId = parseInt(id);
+        this.images$ = this.movieService.getMovieOrTvImagesById(type, newId);
+        this.details$ = this.movieService.getMovieOrTvDetailsById(type, newId);
+        this.trailer$ = this.movieService.getMovieOrTvTrailersById(type, newId);
+        this.similarShows$ = this.movieService.getMovieOrTvSimilarsById(
           type,
-          parseInt(id)
+          newId
         );
+
+        this.movieService
+          .getMovieOrTvDetailsById(type, parseInt(id))
+          .subscribe((data) => {
+            if (data) this.loading = false;
+          });
+      }
     });
   }
 }
