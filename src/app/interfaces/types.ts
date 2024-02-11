@@ -41,3 +41,14 @@ export type IPicture = {
   file_path: string;
   vote_average: number;
 };
+
+export type IActor = {
+  name: string;
+  original_name: string;
+  profile_path: string;
+  charachter: string;
+};
+
+export type CreditsDto = {
+  cast: IActor[];
+};

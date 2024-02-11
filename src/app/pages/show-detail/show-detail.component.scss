@@ -42,3 +42,15 @@
 .show-image {
   width: 100%;
 }
+
+.actor {
+  padding: 10px;
+  img {
+    width: 100%;
+    object-fit: fill;
+  }
+
+  p {
+    text-align: center;
+  }
+}

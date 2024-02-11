@@ -9,12 +9,15 @@ import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-sp
 import { TabViewModule } from 'primeng/tabview';
 import { posterUrl } from '../../cosntants/images-size';
 import {
+  IActor,
   IMovieTvShow,
   IMovieTvTrailer,
   IPicture,
 } from '../../interfaces/types';
 import { YoutubePlayerComponent } from '../../components/youtube-player/youtube-player.component';
 import { BannerComponent } from '../../components/banner/banner.component';
+import { ImageModule } from 'primeng/image';
+import { CarouselModule } from 'primeng/carousel';
 
 @Component({
   selector: 'app-show-detail',
@@ -26,6 +29,8 @@ import { BannerComponent } from '../../components/banner/banner.component';
     LoadingSpinnerComponent,
     YoutubePlayerComponent,
     BannerComponent,
+    ImageModule,
+    CarouselModule,
   ],
   templateUrl: './show-detail.component.html',
   styleUrl: './show-detail.component.scss',
@@ -35,6 +40,8 @@ export class ShowDetailComponent implements OnInit {
 
   public trailer$?: Observable<IMovieTvTrailer[]>;
 
+  public actors$?: Observable<IActor[]>;
+
   public similarShows$?: Observable<IMovieTvShow[]>;
 
   public images$?: Observable<IPicture[]>;
@@ -43,7 +50,7 @@ export class ShowDetailComponent implements OnInit {
 
   public loading = true;
 
-  public posterUrl = posterUrl.w500;
+  public posterUrl = posterUrl;
 
   constructor(
     private movieService: MovieService,
@@ -60,6 +67,7 @@ export class ShowDetailComponent implements OnInit {
       if (type && id) {
         const newId = parseInt(id);
         this.images$ = this.movieService.getMovieOrTvImagesById(type, newId);
+        this.actors$ = this.movieService.getMovieOrTvCastById(type, newId);
         this.details$ = this.movieService.getMovieOrTvDetailsById(type, newId);
         this.trailer$ = this.movieService.getMovieOrTvTrailersById(type, newId);
         this.similarShows$ = this.movieService.getMovieOrTvSimilarsById(

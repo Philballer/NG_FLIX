@@ -11,7 +11,11 @@
     <p-tabPanel header="Overview">
       <div class="grid">
         <div class="col-3">
-          <img class="poster" [src]="posterUrl + data.poster_path" alt="" />
+          <img
+            class="poster"
+            [src]="posterUrl.w500 + data.poster_path"
+            alt=""
+          />
         </div>
         <div class="col-9">
           <h2>Overview</h2>
@@ -66,25 +70,46 @@
           </div>
         </div>
       </ng-container>
-
-      <pre>
-        {{ images$ | async | json }}
-      </pre>
     </p-tabPanel>
     <p-tabPanel header="Photos">
       <ng-container *ngIf="images$ | async as photos">
         <div class="grid">
-          <div class="col-2" *ngFor="let photo of photos">
-            <img
-              class="show-image"
-              [src]="posterUrl + photo.file_path"
-              alt=""
-            />
+          <div class="col-2" *ngFor="let photo of photos | slice: 0 : 24">
+            <p-image
+              [src]="posterUrl.original + photo.file_path"
+              [alt]="isTvShow ? data.name : data.original_title"
+              width="100%"
+              [preview]="true"
+            ></p-image>
           </div>
         </div>
       </ng-container>
     </p-tabPanel>
   </p-tabView>
+
+  <ng-container *ngIf="actors$ | async as actors">
+    <p-carousel
+      [value]="actors"
+      [numVisible]="6"
+      [numScroll]="6"
+      [circular]="false"
+    >
+      <ng-template let-actor pTemplate="item">
+        <div class="actor">
+          <ng-container *ngIf="actor.profile_path; else unknown">
+            <img
+              [src]="posterUrl.w342 + actor.profile_path"
+              [alt]="actor.name"
+            />
+          </ng-container>
+          <p>
+            {{ actor.name }}
+          </p>
+          <p>( {{ actor.character }} )</p>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </ng-container>
 
   <ng-container *ngIf="similarShows$ | async as shows">
     <app-banner
@@ -96,3 +121,10 @@
     ></app-banner>
   </ng-container>
 </ng-container>
+
+<ng-template #unknown>
+  <img
+    src="https://assets.mycast.io/actor_images/actor-a-unknown-voice-actor-745520_large.jpg?1682266765"
+    alt=""
+  />
+</ng-template>

@@ -1,1 +1,40 @@
-<p>movie-list works!</p>
+<div class="form-group">
+  <input
+    (click)="showLastSearches()"
+    (input)="onInputChange(userInput.value)"
+    (blur)="setShowRecomendationBox(false)"
+    type="text"
+    name=""
+    id=""
+    #userInput
+    placeholder="Search for a Movie or Tv-show"
+  />
+
+  <ng-container *ngIf="showRecomendationBox">
+    <div class="recomendation animate">
+      <div class="recomendation_list">
+        <div class="grid">
+          <div class="col-1 image">
+            <img
+              class="poster"
+              src="https://akns-images.eonline.com/eol_images/Entire_Site/2018112/rs_634x939-181202195654-634.captain-marvel.12418.jpg?fit=around%7C634:939&output-quality=90&crop=634:939;center,top"
+              alt=""
+            />
+          </div>
+          <div class="col-4 name">
+            <span>Captain Marvel</span>
+          </div>
+          <div class="col-3 rating">
+            <span> rating... </span>
+          </div>
+          <div class="col-2 overage">
+            <div class="adult">18</div>
+          </div>
+          <div class="col-2 year">
+            <span>2024</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
